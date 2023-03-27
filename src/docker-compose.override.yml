@@ -4,16 +4,16 @@ services:
   #database section
   
   #orderdb: sql server
-  orderdb:
-    container_name: orderdb
-    environment:
-      SA_PASSWORD: "Passw0rd!"
-      ACCEPT_EULA: "Y"
-    restart: always
-    volumes:
-      - sqlserver_data:/var/lib/sqlserver/data
-    ports:
-      - "1435:1433"
+  #orderdb:
+  #  container_name: orderdb
+  #  environment:
+  #    SA_PASSWORD: "Passw0rd!"
+  #    ACCEPT_EULA: "Y"
+  #  restart: always
+  #  volumes:
+  #    - sqlserver_data:/var/lib/sqlserver/data
+  #  ports:
+  #    - "1435:1433"
 
   #productdb: mysql
   productdb:
@@ -24,36 +24,36 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
 
   #customerdb: postgres
-  customerdb:
-    container_name: customerdb
-    environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin1234
-      - POSTGRES_DB=CustomerDb
-    restart: always
-    ports:
-      - "5433:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+  #customerdb:
+  #  container_name: customerdb
+  #  environment:
+  #    - POSTGRES_USER=admin
+  #    - POSTGRES_PASSWORD=admin1234
+  #    - POSTGRES_DB=CustomerDb
+  #  restart: always
+  #  ports:
+  #    - "5433:5432"
+  #  volumes:
+  #    - postgres_data:/var/lib/postgresql/data
 
   #basketdb: redis
-  basketdb:
-    container_name: basketdb
-    restart: always
-    ports:
-      - "6379:6379"
+  #basketdb:
+  #  container_name: basketdb
+  #  restart: always
+  #  ports:
+  #    - "6379:6379"
   
   #inventorydb: mongo
-  inventorydb:
-    container_name: inventorydb
-    restart: always
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
+  #inventorydb:
+  #  container_name: inventorydb
+  #  restart: always
+  #  ports:
+  #    - "27017:27017"
+  #  volumes:
+  #    - mongo_data:/data/db
 
   #infrastructure section
   
