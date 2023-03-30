@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shared.DTOs.Product
 {
-  public class CreateProductDto
+  public class CreateProductDto : CreateOrUpdateProductDto
   {
     [Required]
     public string No { get; set; }

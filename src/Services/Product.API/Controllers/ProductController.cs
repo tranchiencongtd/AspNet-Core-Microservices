@@ -23,6 +23,9 @@ namespace Product.API.Controllers
       _mapper = mapper;
     }
 
+    
+
+    #region CRUD
     [HttpGet]
     public async Task<IActionResult> GetProducts()
     {
@@ -31,7 +34,13 @@ namespace Product.API.Controllers
       return Ok(result);
     }
 
-    #region CRUD
+    [HttpGet("{id:long}")]
+    public async Task<IActionResult> GetProduct([Required] long id)
+    {
+      var product = await _repository.GetProductByIdAsync(id);
+      var result = _mapper.Map<ProductDto>(product);
+      return Ok(result);
+    }
 
     [HttpPost]
     public async Task<ActionResult> CreateProduct([FromBody] CreateProductDto productDto)
