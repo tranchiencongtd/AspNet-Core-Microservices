@@ -2,6 +2,7 @@
 using Customer.API.Persistence;
 using Customer.API.Repositories.Interfaces;
 using Infrastructure.Common;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Customer.API.Repositories
@@ -12,39 +13,34 @@ namespace Customer.API.Repositories
     {
     }
 
-    public Task CreateCustomerAsync(Entities.Customer customer)
+    public async Task CreateCustomerAsync(Entities.Customer customer) => await CreateAsync(customer);
+
+
+    public async Task DeleteCustomerAsync(int id)
     {
-      throw new NotImplementedException();
+      var customer = await GetByIdAsync(id);
+      if (customer != null) await DeleteAsync(customer);
+    }
+    
+
+    public async Task<Entities.Customer?> GetCustomerByEmailAsync(string email)
+    {
+      return await FindByCondition(x => x.Email.Equals(email)).SingleOrDefaultAsync();
     }
 
-    public Task DeleteCustomerAsync(long id)
+    public async Task<Entities.Customer?> GetCustomerByIdAsync(int id)
     {
-      throw new NotImplementedException();
+      return await FindByCondition(x => x.Id.Equals(id)).SingleOrDefaultAsync();
     }
 
-    public Task<Entities.Customer> GetCustomerByEmailAsync(string email)
+    public async Task<Entities.Customer?> GetCustomerByUserNameAsync(string userName)
     {
-      throw new NotImplementedException();
+      return await FindByCondition(x => x.UserName.Equals(userName)).SingleOrDefaultAsync();
     }
 
-    public Task<Entities.Customer> GetCustomerByIdAsync(long id)
-    {
-      throw new NotImplementedException();
-    }
+    public async Task<IEnumerable<Entities.Customer>> GetCustomersAsync() => await FindAll().ToListAsync();
 
-    public Task<Entities.Customer> GetCustomerByUserNameAsync(string email)
-    {
-      throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<Entities.Customer>> GetCustomersAsync()
-    {
-      throw new NotImplementedException();
-    }
-
-    public Task UpdateCustomerAsync(Entities.Customer customer)
-    {
-      throw new NotImplementedException();
-    }
+    public async Task UpdateCustomerAsync(Entities.Customer customer) => await UpdateAsync(customer);
+   
   }
 }

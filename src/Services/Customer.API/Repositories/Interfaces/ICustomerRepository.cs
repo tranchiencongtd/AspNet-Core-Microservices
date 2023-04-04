@@ -3,14 +3,14 @@ using Customer.API.Persistence;
 
 namespace Customer.API.Repositories.Interfaces
 {
-  public interface ICustomerRepository : IRepositoryQueryBase<Entities.Customer, int, CustomerContext>
+  public interface ICustomerRepository : IRepositoryBaseAsync<Entities.Customer, int, CustomerContext>
   {
     Task<IEnumerable<Entities.Customer>> GetCustomersAsync();
-    Task<Entities.Customer> GetCustomerByIdAsync(long id);
-    Task<Entities.Customer> GetCustomerByEmailAsync(string email);
-    Task<Entities.Customer> GetCustomerByUserNameAsync(string email);
+    Task<Entities.Customer?> GetCustomerByIdAsync(int id);
+    Task<Entities.Customer?> GetCustomerByEmailAsync(string email);
+    Task<Entities.Customer?> GetCustomerByUserNameAsync(string userName);
     Task CreateCustomerAsync(Entities.Customer customer);
     Task UpdateCustomerAsync(Entities.Customer customer);
-    Task DeleteCustomerAsync(long id);
+    Task DeleteCustomerAsync(int id);
   }
 }
