@@ -35,21 +35,11 @@ try
   var app = builder.Build();
 
   app.MapGet("/", () => "Welcome to customer API");
-  app.MapGet("/api/customers", async (ICustomerService customerService) => await customerService.GetCustomersAsync());
   app.MapGet("/api/customers/{userName}", async (string userName, ICustomerService customerService) =>
   {
     var customer = await customerService.GetCustomerByUserNameAsync(userName);
     return customer != null ? Results.Ok(customer) : Results.NoContent();
   });
-
-  app.MapDelete("api/customers/{id}", (int id, ICustomerService customerService) => customerService.DeleteCustomerAsync(id));
-
-  // Phan duoi nay nho tao dto va su dung mapper nhe o day tui luoi :>
-  app.MapPost("/api/customers", (Customer.API.Entities.Customer customer, ICustomerService customerService) 
-    => customerService.CreateCustomerAsync(customer));
-
-  app.MapPut("/api/customers", (Customer.API.Entities.Customer customer, ICustomerService customerService) 
-    => customerService.UpdateCustomerAsync(customer));
 
   // Configure the HTTP request pipeline.
   if (app.Environment.IsDevelopment())
