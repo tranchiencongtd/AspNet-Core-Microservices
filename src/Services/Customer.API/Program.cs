@@ -37,8 +37,8 @@ try
   app.MapGet("/", () => "Welcome to customer API");
   app.MapGet("/api/customers/{userName}", async (string userName, ICustomerService customerService) =>
   {
-    var customer = await customerService.GetCustomerByUserNameAsync(userName);
-    return customer != null ? Results.Ok(customer) : Results.NoContent();
+    var result = await customerService.GetCustomerByUserNameAsync(userName);
+    return result != null ? Results.Ok(result) : Results.NoContent();
   });
 
   // Configure the HTTP request pipeline.
