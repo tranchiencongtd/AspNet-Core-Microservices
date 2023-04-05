@@ -10,14 +10,17 @@ using Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseSerilog(Serilogger.Configure);
+Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger();
 
-Log.Information("Starting Customer API up");
+var builder = WebApplication.CreateBuilder(args);
+
+Log.Information($"Starting {builder.Environment.ApplicationName} up");
+
 
 try
 {
   // Add services to the container.
+  builder.Host.UseSerilog(Serilogger.Configure);
 
   builder.Services.AddControllers();
   // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -40,10 +43,10 @@ try
   if (app.Environment.IsDevelopment())
   {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.jon", $"{builder.Environment.ApplicationName} v1"));
   }
 
-  app.UseHttpsRedirection();
+  //app.UseHttpsRedirection(); //product only
 
   app.UseAuthorization();
 
@@ -62,7 +65,7 @@ catch (Exception ex)
 }
 finally
 {
-  Log.Information("Shut down Customer API complete");
+  Log.Information($"Shut down {builder.Environment.ApplicationName} complete");
   Log.CloseAndFlush();
 }
 
