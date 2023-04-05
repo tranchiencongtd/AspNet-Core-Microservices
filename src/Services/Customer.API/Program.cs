@@ -1,5 +1,6 @@
 using Common.Logging;
 using Contracts.Common.Interfaces;
+using Customer.API.Controllers;
 using Customer.API.Persistence;
 using Customer.API.Repositories;
 using Customer.API.Repositories.Interfaces;
@@ -26,20 +27,14 @@ try
   var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
   builder.Services.AddDbContext<CustomerContext>(options => options.UseNpgsql(connectionString));
   // Add inject
-  builder.Services.AddScoped(typeof(IRepositoryBaseAsync<,,>), typeof(RepositoryBaseAsync<,,>))
-                     .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
-                     .AddScoped<ICustomerRepository, CustomerRepository>()
-                     .AddScoped<ICustomerService, CustomerService>()
-                     ;
+  builder.Services.AddScoped<ICustomerRepository, CustomerRepository>()
+                  .AddScoped<ICustomerService, CustomerService>()
+                  ;
 
   var app = builder.Build();
 
   app.MapGet("/", () => "Welcome to customer API");
-  app.MapGet("/api/customers/{userName}", async (string userName, ICustomerService customerService) =>
-  {
-    var result = await customerService.GetCustomerByUserNameAsync(userName);
-    return result != null ? Results.Ok(result) : Results.NoContent();
-  });
+  app.MapCustomersApi();
 
   // Configure the HTTP request pipeline.
   if (app.Environment.IsDevelopment())

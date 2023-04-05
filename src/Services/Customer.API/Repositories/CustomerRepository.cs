@@ -7,9 +7,9 @@ using System.Linq.Expressions;
 
 namespace Customer.API.Repositories
 {
-  public class CustomerRepository : RepositoryBaseAsync<Entities.Customer, int, CustomerContext>, ICustomerRepository
+  public class CustomerRepository : RepositoryQueryBase<Entities.Customer, int, CustomerContext>, ICustomerRepository
   {
-    public CustomerRepository(CustomerContext dbContext, IUnitOfWork<CustomerContext> unitOfWork) : base(dbContext, unitOfWork)
+    public CustomerRepository(CustomerContext dbContext) : base(dbContext)
     {
     }
 
