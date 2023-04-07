@@ -20,7 +20,7 @@ namespace Basket.API.Controllers
 
     [HttpGet("{userName}",Name = "GetBasket")]
     [ProducesResponseType(typeof(Cart), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult<Cart>> GetBasketByUserName([Required] string userName)
+    public async Task<ActionResult<Cart>> GetBasketByUserName([Required] string userName)
     {
       var result = await _repository.GetBasketByUserName(userName);
       return Ok(result ?? new Cart());
@@ -28,7 +28,7 @@ namespace Basket.API.Controllers
 
     [HttpPost(Name ="UpdateBasket")]
     [ProducesResponseType(typeof(Cart), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult<Cart>> UpdateBasket([FromBody] Cart cart)
+    public async Task<ActionResult<Cart>> UpdateBasket([FromBody] Cart cart)
     {
       var options = new DistributedCacheEntryOptions()
         .SetAbsoluteExpiration(DateTime.UtcNow.AddHours(1))
