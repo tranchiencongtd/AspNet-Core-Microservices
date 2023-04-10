@@ -131,14 +131,14 @@ services:
       - "6003:80" # quy uoc la containerize thi port 6 
     restart: always
 
-  basket.api:
-    container_name: basket.api
-    environment:
-      - ASPNETCORE_ENVIROMENT=Development #neu la local thi tao appsetting.Local.json va doi ten o day thanh Local la dc
-      - ASPNETCORE_URLS=http://+:80
-      - "CacheSettings:ConnectionString=basketdb:6379"
-    depends_on:
-      - customerdb
-    ports:
-      - "6004:80" 
-    restart: always  
+  #basket.api:
+  #  container_name: basket.api
+  #  environment:
+  #    - ASPNETCORE_ENVIROMENT=Development #neu la local thi tao appsetting.Local.json va doi ten o day thanh Local la dc
+  #    - ASPNETCORE_URLS=http://+:80
+  #    - "CacheSettings:ConnectionString=basketdb:6379"
+  #  depends_on:
+  #    - customerdb
+  #  ports:
+  #    - "6004:80" 
+  #  restart: always  
