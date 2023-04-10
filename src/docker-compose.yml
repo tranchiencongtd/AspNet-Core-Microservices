@@ -11,8 +11,8 @@ services:
   customerdb:
     image: postgres:alpine3.16
   
-  #basketdb:
-  #  image: redis:alpine
+  basketdb:
+    image: redis:alpine
 
   #inventorydb:
   #  image: mongo
@@ -48,6 +48,12 @@ services:
     build:
         context: .
         dockerfile: Services/Customer.API/Dockerfile
+
+  #basket.api:
+  #  image: ${DOCKER_REGISTRY-}basket-api:${PLATFORM:-linux}-${TAG:-lastest}
+  #  build:
+  #      context: .
+  #      dockerfile: Services/Basket.API/Dockerfile 
 
     
 #network section

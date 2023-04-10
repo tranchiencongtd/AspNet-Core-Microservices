@@ -40,11 +40,11 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   #basketdb: redis
-  #basketdb:
-  #  container_name: basketdb
-  #  restart: always
-  #  ports:
-  #    - "6379:6379"
+  basketdb:
+    container_name: basketdb
+    restart: always
+    ports:
+      - "6379:6379"
   
   #inventorydb: mongo
   #inventorydb:
@@ -130,3 +130,15 @@ services:
     ports:
       - "6003:80" # quy uoc la containerize thi port 6 
     restart: always
+
+  basket.api:
+    container_name: basket.api
+    environment:
+      - ASPNETCORE_ENVIROMENT=Development #neu la local thi tao appsetting.Local.json va doi ten o day thanh Local la dc
+      - ASPNETCORE_URLS=http://+:80
+      - "CacheSettings:ConnectionString=basketdb:6379"
+    depends_on:
+      - customerdb
+    ports:
+      - "6004:80" 
+    restart: always  
