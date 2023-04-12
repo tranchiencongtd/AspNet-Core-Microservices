@@ -4,16 +4,16 @@ services:
   #database section
   
   #orderdb: sql server
-  #orderdb:
-  #  container_name: orderdb
-  #  environment:
-  #    SA_PASSWORD: "Passw0rd!"
-  #    ACCEPT_EULA: "Y"
-  #  restart: always
-  #  volumes:
-  #    - sqlserver_data:/var/lib/sqlserver/data
-  #  ports:
-  #    - "1435:1433"
+  orderdb:
+    container_name: orderdb
+    environment:
+      SA_PASSWORD: "Passw0rd!"
+      ACCEPT_EULA: "Y"
+    restart: always
+    volumes:
+      - sqlserver_data:/var/lib/sqlserver/data
+    ports:
+      - "1435:1433"
 
   #productdb: mysql
   productdb:
