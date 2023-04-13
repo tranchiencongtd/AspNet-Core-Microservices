@@ -1,18 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Contracts.Common.Interfaces;
+using Contracts.Services;
+using Infrastructure.Common;
+using Infrastructure.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ordering.Application.Common.Interfaces;
 using Ordering.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Ordering.Infrastructure.Repositories;
 
 namespace Ordering.Infrastructure
 {
   public static class ConfigureServices
   {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration) 
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
       services.AddDbContext<OrderContext>(options =>
       {
@@ -20,6 +21,9 @@ namespace Ordering.Infrastructure
       });
 
       services.AddScoped<OrderContextSeed>();
+      services.AddScoped<IOrderRepository, OrderRepository>();
+      services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+      services.AddScoped<ISmtpEmailService, SmtpEmailService>();
 
       return services;
     }

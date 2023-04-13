@@ -17,8 +17,8 @@ namespace Infrastructure.Common
 
     public RepositoryBase(TContext dbContext, IUnitOfWork<TContext> unitOfWork) : base(dbContext)
     {
-      _dbContext = dbContext ?? throw new ArgumentNullException(nameof(_dbContext));
-      _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(_unitOfWork));
+      _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+      _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
     }
  
     public async Task<K> CreateAsync(T entity)

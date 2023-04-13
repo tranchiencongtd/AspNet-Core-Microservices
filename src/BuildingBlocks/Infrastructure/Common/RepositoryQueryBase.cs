@@ -16,7 +16,7 @@ namespace Infrastructure.Common
 
     public RepositoryQueryBase(TContext dbContext)
     {
-      _dbContext = dbContext ?? throw new ArgumentNullException(nameof(_dbContext)); 
+      _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext)); 
     }
 
     public IQueryable<T> FindAll(bool trackChanges = false) => !trackChanges ? _dbContext.Set<T>().AsNoTracking() : _dbContext.Set<T>();

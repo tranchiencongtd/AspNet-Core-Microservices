@@ -49,7 +49,7 @@ namespace Product.API.Controllers
       if (productEntity != null) return BadRequest($"Product no: {productDto.No} is existed");
 
       var product = _mapper.Map<CatalogProduct>(productDto);
-      await _repository.CreateAsync(product);
+      await _repository.CreateProductAsync(product);
       await _repository.SaveChangesAsync();
       return Ok(product);
     }
@@ -77,7 +77,7 @@ namespace Product.API.Controllers
       if (product == null)
         return NotFound();
 
-      await _repository.DeleteAsync(product);
+      await _repository.DeleteProductAsync(product.Id);
       await _repository.SaveChangesAsync();
 
       return NoContent();
