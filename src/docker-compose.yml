@@ -49,6 +49,12 @@ services:
         context: .
         dockerfile: Services/Customer.API/Dockerfile
 
+  #order.api:
+  #  image: ${DOCKER_REGISTRY-}order-api:${PLATFORM:-linux}-${TAG:-lastest}
+  #  build:
+  #      context: .
+  #      dockerfile: Services/Ordering/Ordering.API/Dockerfile
+
   #basket.api:
   #  image: ${DOCKER_REGISTRY-}basket-api:${PLATFORM:-linux}-${TAG:-lastest}
   #  build:

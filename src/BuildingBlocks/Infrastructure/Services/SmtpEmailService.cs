@@ -15,8 +15,8 @@ namespace Infrastructure.Services
     private readonly SmtpClient _smtpClient;
     public SmtpEmailService(ILogger logger, EmailSMTPSettings settings)
     {
-      _logger = logger ?? throw new ArgumentNullException(nameof(_logger));
-      _settings = settings ?? throw new ArgumentNullException(nameof(_settings));
+      _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+      _settings = settings ?? throw new ArgumentNullException(nameof(settings));
       _smtpClient = new SmtpClient();
     }
 
