@@ -9,7 +9,7 @@ namespace Basket.API.Extensions
   {
     public static IServiceCollection ConfigureServices(this IServiceCollection services) =>
       services.AddScoped<IBasketRepository, BasketRepository>()
-        .AddTransient<ISeriallizeService, SerializeService>()
+        .AddTransient<ISeriallizeService, SeriallizeService>()
       ;
 
     public static void ConfigureRedis(this IServiceCollection services, IConfiguration configuration)

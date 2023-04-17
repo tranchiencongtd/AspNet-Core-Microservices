@@ -7,7 +7,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Infrastructure.Common
 {
-  public class SerializeService : ISeriallizeService
+  public class SeriallizeService : ISeriallizeService
   {
     public T Deserialize<T>(string text) => JsonConvert.DeserializeObject<T>(text);
 

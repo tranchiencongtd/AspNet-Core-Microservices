@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace Ordering.Application.Common.Models
 {
@@ -23,5 +24,10 @@ namespace Ordering.Application.Common.Models
     public string ShippingAddress { get; set; }
     public string InvoiceAddress { get; set; }
     public EOrderStatus Status { get; set; }
+
+    public void Mapping(Profile profile)
+    {
+      profile.CreateMap<Order, OrderDto>().ReverseMap();
+    }
   }
 }
